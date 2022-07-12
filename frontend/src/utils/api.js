@@ -16,7 +16,7 @@ class Api {
       if (res.ok) {
         return res.json()
       }
-      throw 'Request failed'
+      throw new Error('Request failed')
     })
   }
   postCard ({ name, url }) {
