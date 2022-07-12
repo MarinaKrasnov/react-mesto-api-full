@@ -1,0 +1,14 @@
+.profile__titleicon {
+    display: flex;
+    flex-direction: row;
+    /* align-items: center;*/
+    width: 100%;
+}
+
+@media (max-width:837px) {
+    .profile__titleicon {
+
+        align-items: center;
+        position: relative;
+    }
+}

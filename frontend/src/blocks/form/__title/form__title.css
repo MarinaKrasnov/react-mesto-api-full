@@ -1,0 +1,18 @@
+.form__title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+    
+    text-align: center;
+    margin: 0;
+    color: #FFFFFF;  
+    flex-basis: 10vh;
+}
+@media (max-width:650px) {
+  .form__title {
+    font-size: 20px;
+  }
+}

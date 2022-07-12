@@ -1,0 +1,7 @@
+.header_type_login {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 200px;
+    margin-right: 200px;
+}

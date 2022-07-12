@@ -1,0 +1,15 @@
+.header {
+    grid-area: header;
+    padding-bottom: 38px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(84, 84, 84, .7);
+}
+
+@media (max-width:837px) {
+    .header {
+        margin: auto;
+        padding-left: 8px;
+        padding-bottom: 28px;
+        margin-bottom: 43px;
+    }
+}

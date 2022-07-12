@@ -1,0 +1,27 @@
+.profile__overlay {
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.profile__overlay:after {
+    content: '';
+    position: absolute;
+    width: 126px;
+    height: 126px;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    background-image: url(../../../images/Vector-2.svg);
+    background-position: center;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: 26px;
+    transition: opacity 1s linear .1s;
+    opacity: 0;
+}
+
+.profile__overlay:hover::after {
+    opacity: .8;
+}

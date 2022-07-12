@@ -1,0 +1,26 @@
+.form {
+        width: 100%;
+        height: 100%;
+        max-height: 330px;
+        box-shadow: 0px 0px 25px rgba(0, 0, 0, .15);
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding: 32px 34px 35px;
+        display: grid;
+        justify-content: flex-start;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+        border: none;
+    
+
+    max-width: 358px;
+}
+@media (max-width:837px) {
+    .form {
+        width: 282px;
+        padding: 25px 20px;
+        gap: 0;
+    }
+}

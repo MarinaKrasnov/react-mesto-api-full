@@ -1,0 +1,18 @@
+.card__button-like {
+    background-image: url(../../../images/Group-1.svg);
+    background-position: cover;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: #fff;
+    height: 19px;
+    width: 22px;
+    flex-shrink: 2;
+}
+
+.card__button-like:hover {
+    opacity: .5;
+}
+
+@media (max-width:837px) {
+    .card__button-like {}
+}

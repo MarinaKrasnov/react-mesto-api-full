@@ -1,0 +1,7 @@
+.popup__input_type_error {
+    height: 26px;
+}
+
+.popup__input_type_error:nth-of-type(odd) {
+    margin-bottom: 17px;
+}

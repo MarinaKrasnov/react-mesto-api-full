@@ -1,0 +1,13 @@
+.form__sign-in-up {
+    display: flex;
+    flex-direction: row;
+    font-weight: 400;
+    font-family: 'Inter';
+font-style: normal;
+font-size: 14px;
+line-height: 17px;
+box-sizing: border-box;
+align-items: center;
+justify-content: center;
+margin: 0;
+}

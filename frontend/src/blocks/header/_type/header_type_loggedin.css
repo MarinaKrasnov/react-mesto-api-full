@@ -1,0 +1,6 @@
+.header_type_loggedin {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content:  space-between;
+}

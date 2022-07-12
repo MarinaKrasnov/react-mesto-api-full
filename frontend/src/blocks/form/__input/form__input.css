@@ -1,0 +1,23 @@
+.form__input {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    box-sizing: border-box;
+    border: 0;
+    width: 100%;
+    background-color: transparent;
+    height: 42px;
+    border-bottom: solid 1px white;
+    color: white;
+}
+
+.form__input:nth-of-type(odd) {
+    margin-bottom: 17px;
+}
+
+.form__input::-webkit-input-placeholder  {
+    color: #cccccc;
+}
+.form__input:-moz-placeholder {
+    color: #cccccc;
+}
