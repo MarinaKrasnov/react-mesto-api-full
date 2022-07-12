@@ -22,6 +22,7 @@ class Api {
   postCard ({ name, url }) {
     const promise = fetch(`${this._url}/cards`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: name,
@@ -33,7 +34,8 @@ class Api {
   deleteCard (id) {
     const promise = fetch(`${this._url}/cards/${id}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
     return this._makeRequest(promise)
   }
@@ -41,7 +43,8 @@ class Api {
     return this._makeRequest(
       fetch(`${this._url}/users/me`, {
         method: 'GET',
-        headers: this._headers
+        headers: this._headers,
+        credentials: 'include',
       }).catch(err => alert(`Request failed ${err.status}`))
     )
   }
@@ -74,7 +77,8 @@ class Api {
     return this._makeRequest(
       fetch(`${this._url}/cards/${id}/likes`, {
         method: isLiked ? 'DELETE' : 'PUT',
-        headers: this._headers
+        headers: this._headers,
+        credentials: 'include',
       })
     )
   }

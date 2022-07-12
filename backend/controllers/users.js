@@ -121,9 +121,9 @@ module.exports.login = (req, res, next) => {
         }
         const token = jwt.sign({ _id: user._id }, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
 
-        console.log('users',token);
-/*          res.header('authorization', `Bearer ${token}`); */
-         return res.cookie('jwt', token, { httpOnly: true, sameSite: true }).status(200).send({
+        console.log('users', token);
+        /*          res.header('authorization', `Bearer ${token}`); */
+        return res.cookie('jwt', token, { httpOnly: true, sameSite: 'None', secure: true }).status(200).send({
           name: user.name, about: user.about, avatar: user.avatar, email: user.email, _id: user._id
         });
       })
