@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000','https://mesto.nomoreparties.co/v1/cohort-38', credentials: true }));
 app.use(requestLogger);
 app.use('/users', require('./routes/users'));
 app.use('/cards', require('./routes/cards'));

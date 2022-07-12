@@ -33,14 +33,9 @@
   "description": "### Overview",
   "main": "index.js",
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MarinaKrasnov/express-mesto-gha.git"
+    "type": "git"
   },
   "keywords": [],
   "author": "Marina Krasnov",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/MarinaKrasnov/express-mesto-gha/issues"
-  },
-  "homepage": "https://github.com/MarinaKrasnov/express-mesto-gha#readme"
+  "license": "ISC"
 }
