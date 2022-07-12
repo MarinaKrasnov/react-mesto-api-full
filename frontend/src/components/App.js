@@ -154,7 +154,7 @@ function App () {
           setMessage(true)
           setInfoTooltip(true)
           React.setTimeOut(() => {
-            history.push('/sign-in')
+            history.push('/signin')
           }, 3000)
         } else {
           setMessage(false)
@@ -189,7 +189,7 @@ function App () {
     localStorage.removeItem('jwt')
     setIsLoggedIn(false)
     setEmail('')
-    history.push('/sign-in')
+    history.push('/signin')
   }
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -199,7 +199,7 @@ function App () {
             <div className='header__email-container'>
               <p className='header__email'>{email}</p>
               <Link
-                to='sign-in'
+                to='signin'
                 className='header__link link header__link_type_loggedin'
                 onClick={handleSignOut}
               >
@@ -249,9 +249,9 @@ function App () {
             </button>
           </PopupWithForm>
         </ProtectedRoute>
-        <Route path='/sign-up'>
+        <Route path='/signup'>
           <Header className={'header_type_login'}>
-            <Link to='sign-in' className='link'>
+            <Link to='signin' className='link'>
               Войти
             </Link>
           </Header>
@@ -264,9 +264,9 @@ function App () {
             isOpen={isInfoTooltipOpen}
           />
         </Route>
-        <Route path='/sign-in'>
+        <Route path='/signin'>
           <Header className={'header_type_login'}>
-            <Link to='sign-up' className='header__link link'>
+            <Link to='signup' className='header__link link'>
               Регистрация
             </Link>
           </Header>
@@ -280,7 +280,7 @@ function App () {
           />
         </Route>
         <Route exact path='/'>
-          {isLoggedIn ? <Redirect to='/main' /> : <Redirect to='/sign-in' />}
+          {isLoggedIn ? <Redirect to='/main' /> : <Redirect to='/signin' />}
         </Route>
       </Switch>
     </CurrentUserContext.Provider>

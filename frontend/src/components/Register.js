@@ -26,7 +26,7 @@ const Register = ({ onRegister }) => {
   }
 
   return (
-    <Route path='/sign-up'>
+    <Route path='/signup'>
       <form onSubmit={handleSubmit} className='form'>
         <p className='form__title'>Регистрация.</p>
         <p className='register__error'>{state.message}</p>
@@ -54,7 +54,7 @@ const Register = ({ onRegister }) => {
           </button>
           <div className='form__sign-in-up'>
             <p>Уже зарегистрированы? </p>
-            <Link to='sign-in' className='link form__link'>
+            <Link to='signin' className='link form__link'>
               Войти
             </Link>
           </div>

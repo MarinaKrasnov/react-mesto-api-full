@@ -23,7 +23,7 @@ const LogIn = ({ onLogin }) => {
     }
   }
   return (
-    <Route path='/sign-in'>
+    <Route path='/signin'>
       <form onSubmit={handleSubmit} className='form'>
         <p className='form__title'>Вход</p>
         {/*         <p className='register__error'>{inputs.message}</p> */}
