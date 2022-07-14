@@ -20,7 +20,8 @@ require('dotenv').config();
 /* app.use(helmet()); */
 
 app.use(bodyParser.json());
-app.use(cors);
+app.use(cors());
+app.options('*', cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 mongoose.connect('mongodb://localhost:27017/mestodb');
