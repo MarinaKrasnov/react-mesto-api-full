@@ -59,7 +59,7 @@ function App () {
       }
     }
     checkToken()
-  }, [])
+  }, [history])
   //Handlers
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true)

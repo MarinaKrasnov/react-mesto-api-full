@@ -15,7 +15,6 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 const app = express();
-app.use(cors());
 require('dotenv').config();
 
 app.use(helmet());
@@ -25,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
+app.use(cors());
 app.use(requestLogger);
 app.use('/users', require('./routes/users'));
 app.use('/cards', require('./routes/cards'));

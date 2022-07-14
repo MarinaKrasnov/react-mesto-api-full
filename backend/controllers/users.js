@@ -119,12 +119,12 @@ module.exports.login = (req, res, next) => {
         if (!matched) {
           return next(new UnauthorizedError('Неправильные почта или пароль'))
         }
-        const token = jwt.sign({ _id: user._id }, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+        const token = jwt.sign({ _id: user._id.toJSON() },   process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
 
         console.log('users', token);
-        /*          res.header('authorization', `Bearer ${token}`); */
+        res.header('authorization', `Bearer ${token}`);
         return res.cookie('jwt', token, { httpOnly: true, sameSite: 'None', secure: true }).status(200).send({
-          name: user.name, about: user.about, avatar: user.avatar, email: user.email, _id: user._id
+          token
         });
       })
       .catch(next)
