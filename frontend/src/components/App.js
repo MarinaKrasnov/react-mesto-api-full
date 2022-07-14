@@ -53,6 +53,7 @@ function App () {
       if (jwt) {
         auth.checkToken(jwt).then(response => {
           setEmail(response.data.email)
+          console.log(response)
           setIsLoggedIn(true)
           history.push('/main')
         })
