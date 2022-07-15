@@ -1,4 +1,5 @@
-const API_URL = 'https://api.marina.nomorepartiesxyz.ru'
+/* const API_URL = 'https://api.marina.nomorepartiesxyz.ru' */
+const API_URL = 'https://auth.nomoreparties.co'
 
 export const register = (email, password) => {
   return fetch(`${API_URL}/signup`, {
