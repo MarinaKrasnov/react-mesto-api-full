@@ -90,11 +90,13 @@ class Api {
       const api = new Api('https://mesto.nomoreparties.co/v1/cohort-38', {
         Accept: 'application/json',
   'Content-Type': 'application/json; charset=utf-8',
-  authorization: 'c5a7c514-ca8f-4b82-95f7-7b25ec57dd45'
+        authorization: 'c5a7c514-ca8f-4b82-95f7-7b25ec57dd45',
+        'Access-Control-Allow-Headers': 'Content-Type'
+  
 })
 /* const api = new Api('https://api.marina.nomorepartiesxyz.ru', {
   Accept: 'application/json',
-  'Content-Type': 'application/json; charset=utf-8'
+  'Content-Type': 'application/json; charset=utf-8',
 })
  */
 export default api
