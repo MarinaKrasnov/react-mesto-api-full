@@ -20,7 +20,7 @@ require('dotenv').config();
 /* app.use(helmet()); */
 
 app.use(bodyParser.json());
-app.use(cors({ credentials: 'include' }));
+app.use(cors({ credentials: true }));
 app.options('*', cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
