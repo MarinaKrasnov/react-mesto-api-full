@@ -7,6 +7,7 @@ class Api {
     return this._makeRequest(
       fetch(`${this._url}/cards`, {
         method: 'GET',
+        credentials: 'include',
         headers: this._headers
       })
     )
@@ -53,39 +54,41 @@ class Api {
     return this._makeRequest(
       fetch(`${this._url}/users/me`, {
         method: 'PATCH',
+        credentials: 'include',
         headers: this._headers,
         body: JSON.stringify({
           name,
           about
         })
       })
-    )
-  }
-
-  changeAvatar (avatar) {
-    return this._makeRequest(
-      fetch(`${this._url}/users/me/avatar`, {
-        method: 'PATCH',
-        headers: this._headers,
-        body: JSON.stringify({
-          avatar
+      )
+    }
+    
+    changeAvatar (avatar) {
+      return this._makeRequest(
+        fetch(`${this._url}/users/me/avatar`, {
+          method: 'PATCH',
+          credentials: 'include',
+          headers: this._headers,
+          body: JSON.stringify({
+            avatar
+          })
         })
-      })
-    )
-  }
-  changeLikeCardStatus (id, isLiked) {
-    return this._makeRequest(
-      fetch(`${this._url}/cards/${id}/likes`, {
-        method: isLiked ? 'DELETE' : 'PUT',
-        headers: this._headers,
-        credentials: 'include',
-      })
-    )
-  }
-}
-
-const api = new Api('https://mesto.nomoreparties.co/v1/cohort-38', {
-  Accept: 'application/json',
+        )
+      }
+      changeLikeCardStatus (id, isLiked) {
+        return this._makeRequest(
+          fetch(`${this._url}/cards/${id}/likes`, {
+            method: isLiked ? 'DELETE' : 'PUT',
+            headers: this._headers,
+            credentials: 'include',
+          })
+          )
+        }
+      }
+      
+      const api = new Api('https://mesto.nomoreparties.co/v1/cohort-38', {
+        Accept: 'application/json',
   'Content-Type': 'application/json; charset=utf-8',
   authorization: 'c5a7c514-ca8f-4b82-95f7-7b25ec57dd45'
 })
