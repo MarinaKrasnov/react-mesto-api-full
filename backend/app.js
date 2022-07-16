@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
 const {
   errors, celebrate, Joi
 } = require('celebrate');
 const cookieParser = require('cookie-parser');
+const cors = require('./middlewares/cors');
 /* const helmet = require('helmet'); */
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
@@ -22,7 +22,7 @@ require('dotenv').config();
 app.use(bodyParser.json());
 /* app.use(cors({origin:'http://localhost:3000','https://localhost:3000','https://api.marina.nomorepartiesxyz.ru','http://api.marina.nomorepartiesxyz.ru','http://marina.nomorepartiesxyz.ru','https://marina.nomorepartiesxyz.ru', credentials: true })); */
 app.use(cors);
-app.options('*', cors());
+/* app.options('*', cors()); */
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 mongoose.connect('mongodb://localhost:27017/mestodb');
