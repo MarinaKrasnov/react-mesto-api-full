@@ -94,7 +94,12 @@ class Api {
         'Access-Control-Allow-Headers': 'Content-Type'
   
 }) */
-const api = new Api('https://api.marina.nomorepartiesxyz.ru', {
+/* const api = new Api('https://api.marina.nomorepartiesxyz.ru', {
+  Accept: 'application/json',
+  'Content-Type': 'application/json; charset=utf-8',
+})
+ */
+const api = new Api('http://localhost:3000', {
   Accept: 'application/json',
   'Content-Type': 'application/json; charset=utf-8',
 })

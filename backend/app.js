@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 /* app.use(cors({origin:'http://localhost:3000','https://localhost:3000','https://api.marina.nomorepartiesxyz.ru','http://api.marina.nomorepartiesxyz.ru','http://marina.nomorepartiesxyz.ru','https://marina.nomorepartiesxyz.ru', credentials: true })); */
 
 /* app.use(cors()); */
-app.use(cors2('*'));
+app.use(cors2());
 /* app.options('*', cors()); */
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
