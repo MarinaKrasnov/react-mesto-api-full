@@ -1,13 +1,15 @@
 const allowedCors = [
   'http://marina.nomorepatriesxyz.ru',
+  'http://api.marina.nomorepatriesxyz.ru',
   'https://marina.nomorepartiesxyz.ru',
+  'https://api.marina.nomorepartiesxyz.ru',
   'http://localhost:3000',
   'https://localhost:3000'
 ];
 module.exports = (req, res, next) => {
   const { method } = req;
   const { origin } = req.headers;
-  const requestHeaders = req.headers['access-control-request-headers'];
+  const requestHeaders = req.headers['Access-Control-request-headers'];
   res.header('Access-Control-Allow-Credentials', true);
   if (allowedCors.includes(origin)) {
     res.header('Acces-Control-Allow-Origin', origin);
