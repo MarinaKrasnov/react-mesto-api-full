@@ -98,10 +98,12 @@ class Api {
   Accept: 'application/json',
   'Content-Type': 'application/json; charset=utf-8',
 })
- */
-const api = new Api('http://localhost:3000', {
+*/
+  const api = new Api('https://api.marina.nomorepartiesxyz.ru', {
   Accept: 'application/json',
-  'Content-Type': 'application/json; charset=utf-8',
+  'Content-Type': 'application/json',
+  Authorization: `Bearer ${localStorage.getItem('token')}`,
+  'Access-Control-Allow-Origin': '*'
 })
 
 export default api
