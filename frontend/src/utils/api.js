@@ -99,9 +99,9 @@ class Api {
   'Content-Type': 'application/json; charset=utf-8',
 })
 */
-  const api = new Api('https://api.marina.nomorepartiesxyz.ru', {
+const api = new Api('https://api.marina.nomorepartiesxyz.ru', {
   Accept: 'application/json',
-  'Content-Type': 'application/json',
+  'Content-Type': 'application/json; charset=utf-8',
   /* Authorization: `Bearer ${localStorage.getItem('token')}`, */
   'Access-Control-Allow-Origin': '*'
 })
