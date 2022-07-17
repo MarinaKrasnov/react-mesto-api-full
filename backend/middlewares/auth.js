@@ -3,7 +3,7 @@ const UnauthorizedError = require('../errors/unauth');
 
 const auth = (req, res, next) => {
   const { cookies } = req;
-  console.log(cookies);
+  console.log({ cookies });
   if (!cookies) {
     next(new UnauthorizedError('jwt is not valid'));
   } else {
