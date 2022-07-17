@@ -25,7 +25,7 @@ module.exports.getUserById = (req, res, next) => {
     .catch(next)
 };
 module.exports.getUser = (req, res, next) => {
-  const userId = req.user._id;
+  const userId = req.user.id;
   User.findById(userId)
     .then((user) => {
       if (!user) {
@@ -74,10 +74,10 @@ module.exports.createUser = (req, res, next) => {
 };
 
 module.exports.updateUser = (req, res, next) => {
-  const { _id } = req.user;
+  const { id } = req.user;
   const { name, about } = req.body;
   User.findByIdAndUpdate(
-    _id,
+    id,
     { $set: { name, about } },
     { new: true, runValidators: true },
   )
@@ -93,9 +93,9 @@ module.exports.updateUser = (req, res, next) => {
 
 module.exports.updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
-  const { _id } = req.user;
+  const { id } = req.user;
   User.findByIdAndUpdate(
-    _id,
+    id,
     { $set: { avatar } },
     { new: true },
   )
@@ -119,12 +119,9 @@ module.exports.login = (req, res, next) => {
         if (!matched) {
           return next(new UnauthorizedError('Неправильные почта или пароль'))
         }
-        const token = jwt.sign({ _id: user._id.toJSON() }, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
-
-        console.log('users', token);
-        res.header('authorization', `Bearer ${token}`);
-        return res.cookie('jwt', token, { httpOnly: true, sameSite: 'None', secure: true }).status(200).send({
-          token
+        const token = jwt.sign({ id: user.id }, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+        return res.cookie('jwt', token, { httpOnly: true, sameSite: true }).status(200).send({
+          name: user.name, about: user.about, avatar: user.avatar, email: user.email, _id: user.id
         });
       })
       .catch(next)
