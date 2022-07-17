@@ -5,6 +5,7 @@ const API_URL = 'https://api.marina.nomorepartiesxyz.ru'
 export const register = (email, password) => {
   return fetch(`${API_URL}/signup`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -22,6 +23,7 @@ export const register = (email, password) => {
 export const login = (email, password) => {
   return fetch(`${API_URL}/signin`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -33,6 +35,7 @@ export const login = (email, password) => {
 export const checkToken = token => {
   return fetch(`${API_URL}/users/me`, {
     method: 'GET',
+    credentials: 'include',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
