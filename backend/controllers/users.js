@@ -119,7 +119,7 @@ module.exports.login = (req, res, next) => {
         if (!matched) {
           return next(new UnauthorizedError('Неправильные почта или пароль'))
         }
-        const token = jwt.sign({ _id: user._id.toJSON() },   process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+        const token = jwt.sign({ _id: user._id.toJSON() }, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
 
         console.log('users', token);
         res.header('authorization', `Bearer ${token}`);

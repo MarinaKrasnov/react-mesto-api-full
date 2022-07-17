@@ -5,6 +5,8 @@ const allowedCors = [
   'https://api.marina.nomorepartiesxyz.ru',
   'http://localhost:3000',
   'https://localhost:3000'
+  'https://localhost:3001'
+  'https://localhost:3001'
 ];
 module.exports = (req, res, next) => {
   const { method } = req;
