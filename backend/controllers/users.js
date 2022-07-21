@@ -93,9 +93,9 @@ module.exports.updateUser = (req, res, next) => {
 
 module.exports.updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
-  const { id } = req.user;
+  const { _id } = req.user;
   User.findByIdAndUpdate(
-    id,
+    _id,
     { $set: { avatar } },
     { new: true },
   )
@@ -119,13 +119,13 @@ module.exports.login = (req, res, next) => {
         if (!matched) {
           return next(new UnauthorizedError('Неправильные почта или пароль'))
         }
-        const token = jwt.sign({ id: user.id }, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+        const token = jwt.sign({ id: user._id }, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
         return res.cookie('jwt', token, { httpOnly: true, sameSite: true }).status(200).send({
           name: user.name,
           about: user.about,
           avatar: user.avatar,
           email: user.email,
-          _id: user.id,
+          _id: user._id,
           token
         });
       })

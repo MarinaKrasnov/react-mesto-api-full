@@ -39,8 +39,8 @@ function App () {
     if (isLoggedIn) {
       Promise.all([api.getCards(), api.getProfileInfo()])
         .then(([cards, userData]) => {
-          setCards(cards)
-          setCurrentUser(userData)
+          setCards(cards.data)
+          setCurrentUser(userData.data)
         })
         .catch(err => {
           console.log(`Request for data from server is failed.${err}`)
@@ -60,7 +60,7 @@ function App () {
       }
     }
     checkToken()
-  }, [history])
+  }, [])
   //Handlers
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true)
