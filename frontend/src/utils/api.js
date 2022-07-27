@@ -89,7 +89,11 @@ class Api {
   'Content-Type': 'application/json; charset=utf-8',
   authorization: 'c5a7c514-ca8f-4b82-95f7-7b25ec57dd45'
 }) */
-const api = new Api('http://localhost:3000', {
+/* const api = new Api('http://localhost:3000', {
+  Accept: 'application/json',
+  'Content-Type': 'application/json; charset=utf-8',
+}) */
+const api = new Api('http://api.marina.nomorepartiesxyz.ru', {
   Accept: 'application/json',
   'Content-Type': 'application/json; charset=utf-8',
 })
