@@ -39,8 +39,8 @@ function App () {
     if (isLoggedIn) {
       Promise.all([api.getCards(), api.getProfileInfo()])
         .then(([cards, userData]) => {
-          setCards(cards.data)
-          setCurrentUser(userData.data)
+          setCards(cards)
+          setCurrentUser(userData)
         })
         .catch(err => {
           console.log(`Request for data from server is failed.${err}`)
@@ -52,15 +52,14 @@ function App () {
       const jwt = localStorage.getItem('jwt')
       if (jwt) {
         auth.checkToken(jwt).then(response => {
-          setEmail(response.data.email)
-          console.log(response)
+          setEmail(response.email)
           setIsLoggedIn(true)
-          history.push('/main')
+          history.push('/')
         })
       }
     }
     checkToken()
-  }, [])
+  }, [history])
   //Handlers
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true)
@@ -109,7 +108,7 @@ function App () {
 
   function handleCardLike (card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id)
+    const isLiked = card.likes.some(i => i === currentUser._id)
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
       .changeLikeCardStatus(card._id, isLiked)
@@ -151,7 +150,7 @@ function App () {
     auth
       .register(password, email)
       .then(response => {
-        if (response.data) {
+        if (response.email) {
           setMessage(true)
           setInfoTooltip(true)
           React.setTimeOut(() => {
@@ -163,7 +162,7 @@ function App () {
         }
       })
       .then(res => {
-        if (!res.data) {
+        if (!res.email) {
           setMessage(false)
           setInfoTooltip(true)
         }
@@ -178,7 +177,7 @@ function App () {
         localStorage.setItem('jwt', response.token)
         setIsLoggedIn(true)
         setEmail(email)
-        history.push('/main')
+        history.push('/')
       } else {
         setMessage(false)
         setInfoTooltip(true)
@@ -195,7 +194,7 @@ function App () {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Switch>
-        <ProtectedRoute exact path='/main' isLoggedIn={isLoggedIn}>
+        <ProtectedRoute exact path='/' isLoggedIn={isLoggedIn}>
           <Header className={'header_type_loggedin'}>
             <div className='header__email-container'>
               <p className='header__email'>{email}</p>
@@ -280,9 +279,9 @@ function App () {
             isOpen={isInfoTooltipOpen}
           />
         </Route>
-        <Route exact path='/'>
+  {/*       <Route exact path='/'>
           {isLoggedIn ? <Redirect to='/main' /> : <Redirect to='/signin' />}
-        </Route>
+        </Route> */}
       </Switch>
     </CurrentUserContext.Provider>
   )

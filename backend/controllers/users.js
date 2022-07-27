@@ -8,7 +8,7 @@ const User = require('../models/user');
 
 module.exports.getUsers = (req, res, next) => {
   User.find()
-    .then((users) => res.status(200).send({ data: users }))
+    .then((users) => res.status(200).send(users))
     .catch(next)
 };
 
@@ -19,7 +19,7 @@ module.exports.getUserById = (req, res, next) => {
       if (!user) {
         next(new NotFoundError('Пользователь не найден'))
       } else {
-        res.status(200).send({ data: user });
+        res.status(200).send(user);
       }
     })
     .catch(next)
@@ -31,7 +31,7 @@ module.exports.getUser = (req, res, next) => {
       if (!user) {
         next(new NotFoundError('Пользователь не найден'))
       } else {
-        res.status(200).send({ data: user });
+        res.status(200).send(user);
       }
     })
     .catch(next)
@@ -57,6 +57,7 @@ module.exports.createUser = (req, res, next) => {
         password: hash
       })
         .then(() => res.status(201).send({
+
           name: req.body.name,
           about: req.body.about,
           avatar: req.body.avatar,
@@ -85,7 +86,7 @@ module.exports.updateUser = (req, res, next) => {
       if (!user) {
         next(new NotFoundError('Пользователь не найден'))
       } else {
-        res.send({ data: user });
+        res.send(user);
       }
     })
     .catch(next)
@@ -93,9 +94,9 @@ module.exports.updateUser = (req, res, next) => {
 
 module.exports.updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
-  const { _id } = req.user;
+  const { id } = req.user;
   User.findByIdAndUpdate(
-    _id,
+    id,
     { $set: { avatar } },
     { new: true },
   )
@@ -103,7 +104,7 @@ module.exports.updateAvatar = (req, res, next) => {
       if (!user) {
         next(new NotFoundError('Пользователь не найден'))
       } else {
-        res.status(200).send({ data: user });
+        res.status(200).send(user);
       }
     })
     .catch(next)
@@ -119,14 +120,9 @@ module.exports.login = (req, res, next) => {
         if (!matched) {
           return next(new UnauthorizedError('Неправильные почта или пароль'))
         }
-        const token = jwt.sign({ id: user._id }, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+        const token = jwt.sign({ id: user.id }, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
         return res.cookie('jwt', token, { httpOnly: true, sameSite: true }).status(200).send({
-          name: user.name,
-          about: user.about,
-          avatar: user.avatar,
-          email: user.email,
-          _id: user._id,
-          token
+          name: user.name, about: user.about, avatar: user.avatar, email: user.email, _id: user.id
         });
       })
       .catch(next)
