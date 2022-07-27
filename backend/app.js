@@ -19,8 +19,8 @@ const app = express();
 require('dotenv').config();
 
 app.use(bodyParser.json());
-app.use(cors());
-/* app.use(cors({ origin: ['http://localhost:3000', 'https://localhost:3000', 'http://marina.nomorepartiesxyz.ru', 'https://marina.nomorepartiesxyz.ru', 'http://api.marina.nomorepartiesxyz.ru', 'https://api.marina.nomorepartiesxyz.ru'], credentials: true })) */
+/* app.use(cors()); */
+app.use(cors({ origin: ['http://localhost:3000', 'https://localhost:3000', 'http://marina.nomorepartiesxyz.ru', 'https://marina.nomorepartiesxyz.ru', 'http://api.marina.nomorepartiesxyz.ru', 'https://api.marina.nomorepartiesxyz.ru'], credentials: true }))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 mongoose.connect('mongodb://localhost:27017/mestodb');
