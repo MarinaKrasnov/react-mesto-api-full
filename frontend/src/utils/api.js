@@ -93,8 +93,9 @@ class Api {
   Accept: 'application/json',
   'Content-Type': 'application/json; charset=utf-8',
 }) */
-const api = new Api('http://api.marina.nomorepartiesxyz.ru', {
+const api = new Api('https://api.marina.nomorepartiesxyz.ru', {
   Accept: 'application/json',
   'Content-Type': 'application/json; charset=utf-8',
 })
+
 export default api

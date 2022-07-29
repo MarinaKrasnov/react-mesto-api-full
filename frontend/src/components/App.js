@@ -52,6 +52,7 @@ function App () {
       const jwt = localStorage.getItem('jwt')
       if (jwt) {
         auth.checkToken(jwt).then(response => {
+          console.log('App',response)
           setEmail(response.email)
           setIsLoggedIn(true)
           history.push('/')
@@ -59,7 +60,8 @@ function App () {
       }
     }
     checkToken()
-  }, [history])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   //Handlers
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true)
@@ -150,6 +152,7 @@ function App () {
     auth
       .register(password, email)
       .then(response => {
+        console.log(response)
         if (response.email) {
           setMessage(true)
           setInfoTooltip(true)

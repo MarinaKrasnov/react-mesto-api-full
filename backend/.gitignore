@@ -16,4 +16,13 @@ node_modules
 .env
 
 # production
-/build
+build
+.bash_logout
+        .bashrc
+        .cache/
+        .dbshell
+        .mongorc.js
+        .npm/
+        .pm2/
+        .profile
+        .ssh/
