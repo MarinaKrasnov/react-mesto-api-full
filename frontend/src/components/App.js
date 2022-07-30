@@ -15,7 +15,6 @@ import Register from './Register'
 import * as auth from './../utils/auth'
 import { useHistory } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
-import { Redirect } from 'react-router-dom'
 import InfoTooltip from './InfoTooltip'
 function App () {
   // State constants
@@ -59,8 +58,7 @@ function App () {
       }
     }
     checkToken()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [history])
   //Handlers
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true)

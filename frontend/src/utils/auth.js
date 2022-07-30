@@ -43,16 +43,12 @@ export const checkToken = token => {
   }).then(response => {
     if (response.status === 200) {
       return response.json()
-    } else {
-      return Promise.reject(`${response.status} - ${response.message}`)
-    }
+    } 
   })
 }
 
 const checkResponse = response => {
   if (response.ok) {
     return response.json()
-  } else {
-    return Promise.reject(`${response.status} - ${response.message}`)
-  }
+  } 
 }
