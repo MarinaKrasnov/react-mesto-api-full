@@ -121,8 +121,14 @@ module.exports.login = (req, res, next) => {
           return next(new UnauthorizedError('Неправильные почта или пароль'))
         }
         const token = jwt.sign({ id: user.id }, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+        res.header('authorization', `Bearer ${token}`);
         return res.cookie('jwt', token, { httpOnly: true, sameSite: true }).status(200).send({
-          name: user.name, about: user.about, avatar: user.avatar, email: user.email, _id: user.id
+          name: user.name,
+          about: user.about,
+          avatar: user.avatar,
+          email: user.email,
+          _id: user.id,
+          token
         });
       })
       .catch(next)

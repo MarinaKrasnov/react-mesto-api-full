@@ -15,7 +15,7 @@ export const register = (email, password) => {
     if (response.status === 201) {
       return response.json()
     } else {
-      return response
+      throw new Error('409 - Unsuccessful registration');
     }
   })
 }
@@ -43,6 +43,8 @@ export const checkToken = token => {
   }).then(response => {
     if (response.status === 200) {
       return response.json()
+    } else {
+      return Promise.reject(`${response.status} - ${response.message}`)
     }
   })
 }
@@ -50,5 +52,7 @@ export const checkToken = token => {
 const checkResponse = response => {
   if (response.ok) {
     return response.json()
+  } else {
+    return Promise.reject(`${response.status} - ${response.message}`)
   }
 }

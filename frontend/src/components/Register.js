@@ -19,7 +19,6 @@ const Register = ({ onRegister }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log('state:', state)
     if (onRegister && state.email) {
       onRegister(state.email, state.password)
     }
