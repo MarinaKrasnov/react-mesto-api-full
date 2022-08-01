@@ -50,5 +50,5 @@ export const checkToken = token => {
 const checkResponse = response => {
   if (response.ok) {
     return response.json()
-  } 
+  } else return response
 }

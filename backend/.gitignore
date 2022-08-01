@@ -16,7 +16,8 @@ node_modules
 .env
 
 # production
-# build
+build
+/build
 .bash_logout
         .bashrc
         .cache/

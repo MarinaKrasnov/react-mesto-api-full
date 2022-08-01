@@ -4,8 +4,11 @@ const UnauthorizedError = require('../errors/unauth');
 const auth = (req, res, next) => {
   const { cookies } = req;
   const { authorization } = req.headers;
-  if (!!cookies || !!authorization) {
-    const token = cookies ? cookies.jwt : authorization.replace('Bearer ', '');
+  console.log('auth', authorization);
+  console.log('cookies', cookies);
+
+  if (cookies.jwt || authorization) {
+    const token = cookies.jwt ? cookies.jwt : authorization.replace('Bearer ', '');
     let payload;
     try {
       payload = jwt.verify(token, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret');

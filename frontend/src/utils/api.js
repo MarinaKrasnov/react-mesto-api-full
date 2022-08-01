@@ -17,9 +17,7 @@ class Api {
       if (res.ok) {
         return res.json()
       }
-      // eslint-disable-next-line no-throw-literal
-      throw 'Request failed'
-    })
+    }).catch(err => console.log(`Request failed ${err.status}`))
   }
   postCard ({ name, url }) {
     const promise = fetch(`${this._url}/cards`, {
@@ -45,11 +43,10 @@ class Api {
         method: 'GET',
         credentials: 'include',
         headers: this._headers
-      }).catch(err => alert(`Request failed ${err.status}`))
+      })
     )
   }
   editProfileInfo ({ name, about }) {
-    console.log({ name, about })
     return this._makeRequest(
       fetch(`${this._url}/users/me`, {
         method: 'PATCH',
