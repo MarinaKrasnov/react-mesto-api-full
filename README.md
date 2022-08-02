@@ -19,8 +19,14 @@ Training to build responsive mobile adaptive project with a help of React. Proje
 
 * HTML5 * CSS3 * BEM Methodology * Flexbox * Grid 
 * JS * React * Node * Express
-* MongoDB * Cookie authorization
+* MongoDB * authorization
 
 ** [Demo Link](https://marina.nomorepartiesxyz.ru)** 
 
 https://marina.nomorepartiesxyz.ru
+http://marina.nomorepartiesxyz.ru
+51.250.20.134
+
+api: https://api.marina.nomorepartiesxyz.ru
+http://api.marina.nomorepartiesxyz.ru
+51.250.20.134
