@@ -6,9 +6,10 @@ const auth = (req, res, next) => {
   const { authorization } = req.headers;
   console.log('auth', authorization);
   console.log('cookies', cookies);
+  console.log('(cookies.jwt || authorization.startsWith("Bearer "))', cookies.jwt || authorization.startsWith('Bearer '));
 
-  if (cookies.jwt || authorization) {
-    const token = cookies.jwt ? cookies.jwt : authorization.replace('Bearer ', '');
+  if (cookies || authorization.startsWith('Bearer ')) {
+    const token = cookies ? cookies.jwt : authorization.replace('Bearer ', '');
     let payload;
     try {
       payload = jwt.verify(token, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret');
@@ -24,15 +25,3 @@ const auth = (req, res, next) => {
   next()
 }
 module.exports = auth;
-/* module.exports = (req, res, next) => {
-  const { authorization } = req.headers;
-
-  if (!authorization || !authorization.startsWith('Bearer ')) {
-    return res
-      .status(401)
-      .send({ message: 'Необходима авторизация' });
-  }
-
-  // извлечём токен
-  const token = authorization.replace('Bearer ', '');
-}; */

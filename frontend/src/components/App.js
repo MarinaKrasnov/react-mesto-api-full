@@ -33,10 +33,11 @@ function App () {
   const [isInfoTooltipOpen, setInfoTooltip] = React.useState(false)
   const [message, setMessage] = React.useState(false)
   const [email, setEmail] = React.useState()
+  const [jwt, setJWT] = React.useState(localStorage.getItem('jwt'));
   // Effects
   React.useEffect(() => {
     if (isLoggedIn) {
-      Promise.all([api.getCards(), api.getProfileInfo()])
+      Promise.all([api.getCards(jwt), api.getProfileInfo(jwt)])
         .then(([cards, userData]) => {
           setCards(cards)
           setCurrentUser(userData)
@@ -45,7 +46,7 @@ function App () {
           console.log(`Request for data from server is failed.${err}`)
         })
     }
-  }, [isLoggedIn])
+  }, [isLoggedIn, jwt])
   React.useEffect(() => {
     const checkToken = () => {
       const jwt = localStorage.getItem('jwt')
@@ -59,7 +60,7 @@ function App () {
     }
     checkToken()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn])
+  }, [jwt])
   //Handlers
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true)
@@ -84,7 +85,7 @@ function App () {
 
   function handleEditProfileChange ({ name, about }) {
     api
-      .editProfileInfo({ name, about })
+      .editProfileInfo({ name, about },jwt)
       .then(userData => {
         setCurrentUser(userData)
         closeAllPopups()
@@ -96,7 +97,7 @@ function App () {
 
   function handleEditAvatar (avatar) {
     api
-      .changeAvatar(avatar)
+      .changeAvatar(avatar,jwt)
       .then(data => {
         setCurrentUser(data)
         closeAllPopups()
@@ -111,7 +112,7 @@ function App () {
     const isLiked = card.likes.some(i => i === currentUser._id)
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
-      .changeLikeCardStatus(card._id, isLiked)
+      .changeLikeCardStatus(card._id, isLiked,jwt)
       .then(newCard => {
         setCards(state => state.map(c => (c._id === card._id ? newCard : c)))
       })
@@ -122,7 +123,7 @@ function App () {
 
   function handleCardDelete (card) {
     api
-      .deleteCard(card._id)
+      .deleteCard(card._id,jwt)
       .then(() => {
         setCards(cards =>
           cards.filter(item => {
@@ -137,7 +138,7 @@ function App () {
 
   function handleAddPlaceSubmit (newCard) {
     api
-      .postCard(newCard)
+      .postCard(newCard,jwt)
       .then(newCard => {
         setCards([newCard, ...cards])
         closeAllPopups()
@@ -173,7 +174,8 @@ function App () {
   }
   const handleLogin = (email, password) => {
     auth.login(email, password).then(response => {
-      if (response) {
+      if (response.token) {
+        setJWT(response.token)
         localStorage.setItem('jwt', response.token)
         setIsLoggedIn(true)
         setEmail(email)

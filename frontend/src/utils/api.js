@@ -3,15 +3,6 @@ class Api {
     this._url = url
     this._headers = headers
   }
-  getCards () {
-    return this._makeRequest(
-      fetch(`${this._url}/cards`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: this._headers
-      })
-    )
-  }
   _makeRequest (promise) {
     return promise.then(res => {
       if (res.ok) {
@@ -19,10 +10,36 @@ class Api {
       }
     }).catch(err => console.log(`Request failed ${err.status}`))
   }
-  postCard ({ name, url }) {
+  getCards (jwt) {
+    return this._makeRequest(
+      fetch(`${this._url}/cards`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${jwt}`,
+        }
+      }
+    ))
+  }
+  getProfileInfo (jwt) {
+    return this._makeRequest(
+      fetch(`${this._url}/users/me`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${jwt}`,
+        }
+      }
+    ))
+  }
+  postCard ({ name, url },jwt) {
     const promise = fetch(`${this._url}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt}`,
+      },
       body: JSON.stringify({
         name: name,
         link: url
@@ -30,28 +47,25 @@ class Api {
     })
     return this._makeRequest(promise)
   }
-  deleteCard (id) {
+  deleteCard (id,jwt) {
     const promise = fetch(`${this._url}/cards/${id}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt}`,
+      },
     })
     return this._makeRequest(promise)
   }
-  getProfileInfo () {
-    return this._makeRequest(
-      fetch(`${this._url}/users/me`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: this._headers
-      })
-    )
-  }
-  editProfileInfo ({ name, about }) {
+  editProfileInfo ({ name, about },jwt) {
     return this._makeRequest(
       fetch(`${this._url}/users/me`, {
         method: 'PATCH',
         credentials: 'include',
-        headers: this._headers,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${jwt}`,
+        },
         body: JSON.stringify({
           name,
           about
@@ -60,22 +74,28 @@ class Api {
     )
   }
 
-  changeAvatar (avatar) {
+  changeAvatar (avatar,jwt) {
     return this._makeRequest(
       fetch(`${this._url}/users/me/avatar`, {
         method: 'PATCH',
-        headers: this._headers,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${jwt}`,
+        },
         body: JSON.stringify({
           avatar
         })
       })
     )
   }
-  changeLikeCardStatus (id, isLiked) {
+  changeLikeCardStatus (id, isLiked,jwt) {
     return this._makeRequest(
       fetch(`${this._url}/cards/${id}/likes`, {
         method: isLiked ? 'DELETE' : 'PUT',
-        headers: this._headers
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${jwt}`,
+        }
       })
     )
   }
@@ -88,11 +108,8 @@ class Api {
 }) */
 /* const api = new Api('http://localhost:3000', {
   Accept: 'application/json',
-  'Content-Type': 'application/json; charset=utf-8',
+  'Content-Type': 'application/json; charset=utf-8'
 }) */
-const api = new Api('https://api.marina.nomorepartiesxyz.ru', {
-  Accept: 'application/json',
-  'Content-Type': 'application/json; charset=utf-8',
-})
+const api = new Api('https://api.marina.nomorepartiesxyz.ru')
 
 export default api

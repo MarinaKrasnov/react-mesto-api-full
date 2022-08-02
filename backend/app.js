@@ -19,7 +19,6 @@ const app = express();
 require('dotenv').config();
 
 app.use(bodyParser.json());
-/* app.use(cors()); */
 app.use(cors({ origin: ['http://localhost:3000', 'https://localhost:3000', 'http://marina.nomorepartiesxyz.ru', 'https://marina.nomorepartiesxyz.ru', 'http://api.marina.nomorepartiesxyz.ru', 'https://api.marina.nomorepartiesxyz.ru', 'api.marina.nomorepartiesxyz.ru', 'marina.nomorepartiesxyz.ru'], credentials: true }))
 app.options('*', cors());
 app.use(bodyParser.urlencoded({ extended: true }));
