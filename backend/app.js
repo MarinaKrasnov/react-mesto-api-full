@@ -5,7 +5,7 @@ const {
   errors, celebrate, Joi
 } = require('celebrate');
 const cookieParser = require('cookie-parser');
-const path = require('path');
+/* const path = require('path'); */
 const cors = require('cors');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
