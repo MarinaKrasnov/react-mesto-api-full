@@ -8,7 +8,7 @@ module.exports.getCards = (req, res, next) => {
     .then((cards) => {
       res.send(cards.slice(0, 29));
     })
-    .catch(next)
+    .catch(next);
 };
 
 module.exports.createCard = (req, res, next) => {
@@ -19,24 +19,24 @@ module.exports.createCard = (req, res, next) => {
       res.status(201).send(card);
     }).catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Некорректные данные'))
+        next(new BadRequestError('Некорректные данные'));
       } else {
         next(err);
       }
-    })
+    });
 };
 
 module.exports.deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
     .then((card) => {
       if (!card) {
-        next(new NotFoundError('Карточка по указанному id не найдена'))
+        next(new NotFoundError('Карточка по указанному id не найдена'));
       } else if (req.user.id !== card.owner.toString()) {
-        next(new ForbidError('У вас нет прав на удаление'))
+        next(new ForbidError('У вас нет прав на удаление'));
       }
       return Card.findByIdAndRemove(req.params.cardId)
-        .then((user) => res.status(200).send({ data: user })).catch(next)
-    }).catch(next)
+        .then((user) => res.status(200).send({ data: user })).catch(next);
+    }).catch(next);
 };
 
 module.exports.likeCard = (req, res, next) => {
@@ -47,11 +47,11 @@ module.exports.likeCard = (req, res, next) => {
   )
     .then((card) => {
       if (!card) {
-        next(new NotFoundError('Карточка по указанному id не найдена'))
+        next(new NotFoundError('Карточка по указанному id не найдена'));
       } else {
-        res.status(200).send(card)
+        res.status(200).send(card);
       }
-    }).catch(next)
+    }).catch(next);
 };
 module.exports.dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
@@ -61,9 +61,9 @@ module.exports.dislikeCard = (req, res, next) => {
   )
     .then((card) => {
       if (!card) {
-        next(new NotFoundError('Карточка по указанному id не найдена'))
+        next(new NotFoundError('Карточка по указанному id не найдена'));
       } else {
-        res.status(200).send(card)
+        res.status(200).send(card);
       }
-    }).catch(next)
+    }).catch(next);
 };

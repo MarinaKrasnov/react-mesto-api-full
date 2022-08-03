@@ -13,8 +13,8 @@ const cardSchema = new mongoose.Schema({
     required: [true, 'Поле должно быть заполнено'],
     validate: {
       validator: (value) => validator.isURL(value, { protocols: ['http', 'https'], require_tld: true, require_protocol: true }),
-      message: 'Нужно ввести ссылку'
-    }
+      message: 'Нужно ввести ссылку',
+    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

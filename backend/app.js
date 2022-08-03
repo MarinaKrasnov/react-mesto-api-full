@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
 const {
-  errors, celebrate, Joi
+  errors, celebrate, Joi,
 } = require('celebrate');
 const cookieParser = require('cookie-parser');
 /* const path = require('path'); */
@@ -19,10 +19,10 @@ const app = express();
 require('dotenv').config();
 
 app.use(bodyParser.json());
-app.use(cors({ origin: ['http://localhost:3000', 'https://localhost:3000', 'http://marina.nomorepartiesxyz.ru', 'https://marina.nomorepartiesxyz.ru', 'http://api.marina.nomorepartiesxyz.ru', 'https://api.marina.nomorepartiesxyz.ru', 'api.marina.nomorepartiesxyz.ru', 'marina.nomorepartiesxyz.ru'], credentials: true }))
+app.use(cors({ origin: ['http://localhost:3000', 'https://localhost:3000', 'http://marina.nomorepartiesxyz.ru', 'https://marina.nomorepartiesxyz.ru', 'http://api.marina.nomorepartiesxyz.ru', 'https://api.marina.nomorepartiesxyz.ru', 'api.marina.nomorepartiesxyz.ru', 'marina.nomorepartiesxyz.ru'], credentials: true }));
 app.options('*', cors());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser())
+app.use(cookieParser());
 mongoose.connect('mongodb://localhost:27017/mestodb');
 /* app.use(express.static(path.join(__dirname, 'build'))); */
 app.use(requestLogger);
@@ -45,7 +45,7 @@ app.post(
       about: Joi.string().min(2).max(30),
     }),
   }),
-  createUser
+  createUser,
 );
 app.post(
   '/signin',
@@ -55,7 +55,7 @@ app.post(
       password: Joi.string().required(),
     }),
   }),
-  login
+  login,
 );
 app.use('*', auth, () => {
   throw new NotFoundError('Not found');
@@ -69,7 +69,7 @@ app.use((err, req, res, next) => {
     .send({
       message: statusCode === 500
         ? 'На сервере произошла ошибка'
-        : message
+        : message,
     });
   next();
 });

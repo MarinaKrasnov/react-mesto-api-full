@@ -18,6 +18,6 @@ const auth = (req, _res, next) => {
   } else {
     return next(new UnauthorizedError('jwt is not valid'));
   }
-  return next()
-}
+  return next();
+};
 module.exports = auth;
